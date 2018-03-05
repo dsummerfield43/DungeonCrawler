@@ -13,5 +13,9 @@ public class udpServer
 		ds.receive(dp);
 		
 		String input = new String(b);
+		
+		input = input.toUpperCase();
+		
+		System.out.println(input);
 	}
 }
