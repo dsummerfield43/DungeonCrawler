@@ -7,10 +7,7 @@ class udpClient
 	{
 		DatagramSocket ds = new DatagramSocket();
 		
-		byte [] b = new byte(1024);
-		
-		input = clientData.getBytes();
-		
+		byte [] b = "Hello".getBytes();
 		
 		InetAddress ip = InetAddress.getByName("localhost");
 		int port = 2000;
