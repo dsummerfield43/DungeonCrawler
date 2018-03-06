@@ -1,19 +1,26 @@
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 class udpClient
 {
 	public static void main(String[] args) throws Exception
 	{
-		DatagramSocket ds = new DatagramSocket();
+                Scanner scan = new Scanner(System.in);   //Creates Scanner to accept user's message		
+		DatagramSocket ds = new DatagramSocket();       //Creates a socket to allow the packet to be sent 							
+		InetAddress ip = InetAddress.getByName("localhost");		// Sets the local ip address to the variable ip
+		String input = "w"; // Sets String input to "w" so that it will allows go through the following loop atleast once
 		
-		byte [] b = "Hello".getBytes();
+	while(!input.equals("x")) // Creates the loop that continues to run and send messages and packets until the user inputs "x"
+	{		
+		System.out.println("Enter your new message or type 'x' to exit: "); // Accepts the users input or message to be sent
+		input = scan.next();
 		
-		InetAddress ip = InetAddress.getByName("localhost");
-		int port = 2000;
-		
-		DatagramPacket dp = new DatagramPacket(b,b.length,ip,2000);
-				
-				ds.send(dp);
-	}
+		byte [] b = input.getBytes(); // Creates the byte array to store the input into a byt to be sent in a packet
+		DatagramPacket dp = new DatagramPacket(b,b.length,ip,2000); // Creates and fills the packet with the message to be sent
+		ds.send(dp);	 // Sends the packet 
+							
+							
+}							
+}						
 }
