@@ -10,8 +10,15 @@ public class udpServer
 	
 		DatagramPacket dp = new DatagramPacket(b,b.length);
 		
+		while(!input.equals("X"))
+		{
 		ds.receive(dp);
 		
 		String input = new String(b);
+		
+		input = input.toUpperCase();
+		
+		System.out.println(input);
 	}
+}
 }
