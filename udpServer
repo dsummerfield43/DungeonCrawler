@@ -1,22 +1,30 @@
-import java.net.*;
 import java.io.*;
+import java.net.*;
 
 public class udpServer
 {
 	public static void main(String[] args) throws Exception
 	{
-		DatagramSocket ds = new DatagramSocket(2000);
-	        byte [] b = new byte [100];
+		
+		String input = "w";
+		InetAddress ip = InetAddress.getByName("192.168.1.2");
+		
+		DatagramSocket ds = new DatagramSocket(2000); //Creates the socket for UDP connection
 	
-		DatagramPacket dp = new DatagramPacket(b,b.length);
 		
 		while(!input.equals("X"))
 		{
-		ds.receive(dp);
+		byte [] b = new byte [100];
+		DatagramPacket dp = new DatagramPacket(b,b.length, ip, 2000); //Creates the packet
+			
+		ds.receive(dp);  //Receives packet as lower case
 		
-		String input = new String(b);
+		input = new String(b); // Changes the byte array to a string that can be worked with
 		
-		input = input.toUpperCase();
+		input = input.toUpperCase(); // Changes the string to all upper case letters
+		
+		b = input.getBytes(); // Changes the string back to a byte array to be sent as a packet
+		ds.send(dp); //Sends the packet back 
 		
 		System.out.println(input);
 	}
