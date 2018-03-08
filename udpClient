@@ -7,9 +7,9 @@ class udpClient
 	public static void main(String[] args) throws Exception
 	{
                 Scanner scan = new Scanner(System.in);   //Creates Scanner to accept user's message		
-		DatagramSocket ds = new DatagramSocket();       //Creates a socket to allow the packet to be sent 							
-		InetAddress ip = InetAddress.getByName("localhost");		// Sets the local ip address to the variable ip
-		String input = "w"; // Sets String input to "w" so that it will allows go through the following loop atleast once
+		DatagramSocket ds = new DatagramSocket(2000);       //Creates a socket to allow the packet to be sent 							
+		InetAddress ip = InetAddress.getByName("xxx.xxx.x.x");		// Sets the local ip address to the variable ip (set to your local IPv4 Address)
+		String input = "w"; // Sets String input to "w" so that it will go through the following loop atleast once
 		
 	while(!input.equals("x")) // Creates the loop that continues to run and send messages and packets until the user inputs "x"
 	{		
@@ -19,8 +19,13 @@ class udpClient
 		byte [] b = input.getBytes(); // Creates the byte array to store the input into a byt to be sent in a packet
 		DatagramPacket dp = new DatagramPacket(b,b.length,ip,2000); // Creates and fills the packet with the message to be sent
 		ds.send(dp);	 // Sends the packet 
-							
-							
+		
+
+                ds.receive(dp);	
+		String output = new String(b);
+		System.out.println(output);
+
+
 }							
 }						
 }
