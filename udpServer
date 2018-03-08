@@ -7,7 +7,7 @@ public class udpServer
 	{
 		
 		String input = "w";
-		InetAddress ip = InetAddress.getByName("192.168.1.2");
+		InetAddress ip = InetAddress.getByName("xxx.xxx.x.x");
 		
 		DatagramSocket ds = new DatagramSocket(2000); //Creates the socket for UDP connection
 	
