@@ -18,16 +18,13 @@ public class Dungeon
 
 	public void buildDungeon() throws Exception{
 		
-		System.out.println(", You've raided the dungeon but now it is time to leave!");
-		System.out.println("Question is can you make it?");
+		System.out.println(", You've raided the dungeon but now it is time to leave!/nQuestion is can you make it?");//packet0
 		
 		/**
 		 * calling for the hero to be built
 		 */
 		Being hero = new Being(10,5,rand.nextInt(20));
-		System.out.println("You are a human. Here are your stats:");
-		System.out.println(hero.toString());
-		System.out.println("");
+		System.out.println("You are a human. Here are your stats:/n" + hero.toString() + "/n");//packet1
 		
 		/**
 		* The way the user moves through the dungeon
@@ -46,12 +43,9 @@ public class Dungeon
 			* Visual for rooms
 			*/
 			
+			dngTextRoomRoof();	//packet2
 			
-			dngTextRoomRoof();
-			
-			
-			System.out.println("");
-			
+						//packet3
 			if(count == 0){
                             byte[] b2 = characterRoomOne().getBytes();
                         DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
@@ -85,18 +79,14 @@ public class Dungeon
                         DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
                         ds.send(dp2);;
                         }
-			System.out.println("");
-			
-			dngTextRoomFloor();
-			
-			System.out.println("");
+						
+			dngTextRoomFloor();	//packet5
 			
 			/**
 			 * win condition
 			 */
 			if(count == 7) {
-				System.out.println("You have made it to the end of the dungeon!");
-				System.out.println("Game Over! You Win!");
+				System.out.println("You have made it to the end of the dungeon!/nGame Over! You Win!");//packet6
 				return;
 			}
 			
@@ -105,10 +95,9 @@ public class Dungeon
 			*/
 			if(count == 0)
 			{
-				System.out.println("You can only go right from this point");
-				System.out.println("Press R to go right.");
+				System.out.println("You can only go right from this point/nPress R to go right.");//packet7
 			}else{
-				System.out.println("Type L to go left or R to go right");
+				System.out.println("Type L to go left or R to go right");//packet7
 			}
                         
                        /* byte[] b = new byte[2048];
@@ -133,25 +122,25 @@ public class Dungeon
 			* Finding a monster
 			*/
 			if(count == mcount || count == mcount2){
-				System.out.println("You have found a monster!");
+				System.out.println("You have found a monster!");//packet8
 				Being monster = new Being(3,3,rand.nextInt(20));
 				
 				while(monster.getHP() > 0 && hero.getHP() > 0) {
 					if(monster.getInitiative() > hero.getInitiative()) {
-						System.out.println("The monster has gone first!");
+						System.out.println("The monster has gone first!");//packet9
 						hero.setHP(monster.getAtk());
-						System.out.println("The monster has done " + monster.getAtk() + " dmg to you!");
+						System.out.println("The monster has done " + monster.getAtk() + " dmg to you!");//packet10
 					}else {
-						System.out.println("You have gone first!");
+						System.out.println("You have gone first!");//packet9
 						monster.setHP(hero.getAtk());
-						System.out.println("You have done " + hero.getAtk() + " dmg to the monster!");
+						System.out.println("You have done " + hero.getAtk() + " dmg to the monster!");//packet10
 					}
 				}
 				
 				if(monster.getHP() <= 0) {
-					System.out.println("You have slain the monster!");
+					System.out.println("You have slain the monster!");//packet11
 				} else {
-					System.out.println("You've Died!");
+					System.out.println("You've Died!");//packet11
 					return;
 				}
 			}
@@ -162,39 +151,39 @@ public class Dungeon
 	* Base Room roof
 	*/
 	public static void dngTextRoomRoof(){
-		System.out.print(" ___  ___  ___  ___  ___  ___  ___  ___ ");
+		return " ___  ___  ___  ___  ___  ___  ___  ___ /n";
 	}
 	/**
 	* Room that tells where the player is
 	*/
 	public String characterRoomOne(){
-		return "| C ||   ||   ||   ||   ||   ||   ||   |";
+		return "| C ||   ||   ||   ||   ||   ||   ||   |/n";
 	}
 	public String characterRoomTwo(){
-		return "|   || C ||   ||   ||   ||   ||   ||   |";
+		return "|   || C ||   ||   ||   ||   ||   ||   |/n";
 	}
         public String characterRoomThree(){
-		return "|   ||   || C ||   ||   ||   ||   ||   |";
+		return "|   ||   || C ||   ||   ||   ||   ||   |/n";
 	}
         public String characterRoomFour(){
-		return "|   ||   ||   || C ||   ||   ||   ||   |";
+		return "|   ||   ||   || C ||   ||   ||   ||   |/n";
 	}
         public String characterRoomFive(){
-		return "|   ||   ||   ||   || C ||   ||   ||   |";
+		return "|   ||   ||   ||   || C ||   ||   ||   |/n";
 	}
         public String characterRoomSix(){
-		return "|   ||   ||   ||   ||   || C ||   ||   |";
+		return "|   ||   ||   ||   ||   || C ||   ||   |/n";
 	}
         public String characterRoomSeven(){
-		return "|   ||   ||   ||   ||   ||   || C ||   |";
+		return "|   ||   ||   ||   ||   ||   || C ||   |/n";
 	}
         public String characterRoomEight(){
-		return "|   ||   ||   ||   ||   ||   ||   || C |";
+		return "|   ||   ||   ||   ||   ||   ||   || C |/n";
 	}
 	/**
 	 * floor
 	 */
-	public static void dngTextRoomFloor(){
-		System.out.print(" ~~~  ~~~  ~~~  ~~~  ~~~  ~~~  ~~~  ~~~ ");
+	public String dngTextRoomFloor(){
+		return " ~~~  ~~~  ~~~  ~~~  ~~~  ~~~  ~~~  ~~~ /n";
 	}
 }
