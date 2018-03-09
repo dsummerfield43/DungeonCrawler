@@ -18,13 +18,13 @@ public class Dungeon
 
 	public void buildDungeon() throws Exception{
 		
-		System.out.println(", You've raided the dungeon but now it is time to leave!/nQuestion is can you make it?");//packet0
+		System.out.println(", You've raided the dungeon but now it is time to leave!/nQuestion is can you make it?");//packet1
 		
 		/**
 		 * calling for the hero to be built
 		 */
 		Being hero = new Being(10,5,rand.nextInt(20));
-		System.out.println("You are a human. Here are your stats:/n" + hero.toString() + "/n");//packet1
+		System.out.println("You are a human. Here are your stats:/n" + hero.toString() + "/n");//packet2
 		
 		/**
 		* The way the user moves through the dungeon
@@ -43,9 +43,9 @@ public class Dungeon
 			* Visual for rooms
 			*/
 			
-			dngTextRoomRoof();	//packet2
+			dngTextRoomRoof();	//packet3
 			
-						//packet3
+						//packet4
 			if(count == 0){
                             byte[] b2 = characterRoomOne().getBytes();
                         DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
