@@ -4,7 +4,7 @@ package Crawler;
  */
 import java.util.*;
 
-public class testDng{
+public class dngTester{
 
 	public static void main(String[] args){
 		int[] dng = new int[8];
