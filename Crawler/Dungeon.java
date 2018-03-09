@@ -1,8 +1,8 @@
-package Crawler;
 /**
  * Main dungeon class
  */
 import java.util.*;
+import java.net.*;
 
 public class Dungeon
 {
@@ -16,7 +16,7 @@ public class Dungeon
 	String input;
 	Random rand = new Random();
 
-	public void buildDungeon(){
+	public void buildDungeon() throws Exception{
 		
 		System.out.println(", You've raided the dungeon but now it is time to leave!");
 		System.out.println("Question is can you make it?");
@@ -32,30 +32,62 @@ public class Dungeon
 		/**
 		* The way the user moves through the dungeon
 		*/
+                
+                DatagramSocket ds = new DatagramSocket(8000); //Creates the DatagramSocket
+                
 		while(dng[count] <= 7){
+                    
+                    byte[] b = new byte[2048];
+                        DatagramPacket dp = new DatagramPacket(b,b.length);
+                         ds.receive(dp);
+                        byte[] packetData = dp.getData();
+                        String input = new String(packetData);
 			/**
 			* Visual for rooms
 			*/
 			
-			for(int i = 0; i <= 7; i++) {
-				dngTextRoomRoof();
-			}
+			
+			dngTextRoomRoof();
+			
 			
 			System.out.println("");
 			
-			for(int i = 0; i <= 7; i++) {
-				if(i == count) {
-					dngTextCharacterRoom();
-				}else {
-					dngTextEmptyRoom();
-				}
-			}
-			
+			if(count == 0){
+                            byte[] b2 = characterRoomOne().getBytes();
+                        DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
+                        ds.send(dp2);
+                        } else if(count == 1){
+                            byte[] b2 = characterRoomTwo().getBytes();
+                        DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
+                        ds.send(dp2);
+                        } else if(count == 2){
+                            byte[] b2 = characterRoomThree().getBytes();
+                        DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
+                        ds.send(dp2);
+                        } else if(count == 3){
+                            byte[] b2 = characterRoomFour().getBytes();
+                        DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
+                        ds.send(dp2);
+                        } else if(count == 4){
+                            byte[] b2 = characterRoomFive().getBytes();
+                        DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
+                        ds.send(dp2);
+                        } else if(count == 5){
+                            byte[] b2 = characterRoomSix().getBytes();
+                        DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
+                        ds.send(dp2);
+                        } else if(count == 6){
+                            byte[] b2 = characterRoomSeven().getBytes();
+                        DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
+                        ds.send(dp2);
+                        } else if(count == 7){
+                            byte[] b2 = characterRoomEight().getBytes();
+                        DatagramPacket dp2 = new DatagramPacket(b2,b2.length,dp.getAddress(), dp.getPort());
+                        ds.send(dp2);;
+                        }
 			System.out.println("");
 			
-			for(int i = 0; i <= 7; i++) {
-				dngTextRoomFloor();
-			}
+			dngTextRoomFloor();
 			
 			System.out.println("");
 			
@@ -78,16 +110,25 @@ public class Dungeon
 			}else{
 				System.out.println("Type L to go left or R to go right");
 			}
-
-			input = scan.nextLine();
-			if(input.equalsIgnoreCase("L") && count == 0){
+                        
+                       /* byte[] b = new byte[2048];
+                        DatagramPacket dp = new DatagramPacket(b,b.length);
+                        */
+                    //    ds.receive(dp);
+                        /*
+                        byte[] packetData = dp.getData();
+                        String input = new String(packetData);
+                            
+			//input = scan.nextLine();*/
+			if(input.trim().equalsIgnoreCase("L") && count == 0){
 				count = 0;
-			}else if(input.equalsIgnoreCase("L")) {
+			}else if(input.trim().equalsIgnoreCase("L")) {
 				count--;
-			}else if(input.equalsIgnoreCase("R")){
+			}else if(input.trim().equalsIgnoreCase("R")){
 				count++;
-			}
-
+			} 
+                        
+                            
 			/**
 			* Finding a monster
 			*/
@@ -121,24 +162,39 @@ public class Dungeon
 	* Base Room roof
 	*/
 	public static void dngTextRoomRoof(){
-		System.out.print(" ___ ");
+		System.out.print(" ___  ___  ___  ___  ___  ___  ___  ___ ");
 	}
 	/**
 	* Room that tells where the player is
 	*/
-	public static void dngTextCharacterRoom(){
-		System.out.print("| C |");
+	public String characterRoomOne(){
+		return "| C ||   ||   ||   ||   ||   ||   ||   |";
 	}
-	/**
-	 * Empty room
-	 */
-	public static void dngTextEmptyRoom(){
-		System.out.print("|   |");
+	public String characterRoomTwo(){
+		return "|   || C ||   ||   ||   ||   ||   ||   |";
+	}
+        public String characterRoomThree(){
+		return "|   ||   || C ||   ||   ||   ||   ||   |";
+	}
+        public String characterRoomFour(){
+		return "|   ||   ||   || C ||   ||   ||   ||   |";
+	}
+        public String characterRoomFive(){
+		return "|   ||   ||   ||   || C ||   ||   ||   |";
+	}
+        public String characterRoomSix(){
+		return "|   ||   ||   ||   ||   || C ||   ||   |";
+	}
+        public String characterRoomSeven(){
+		return "|   ||   ||   ||   ||   ||   || C ||   |";
+	}
+        public String characterRoomEight(){
+		return "|   ||   ||   ||   ||   ||   ||   || C |";
 	}
 	/**
 	 * floor
 	 */
 	public static void dngTextRoomFloor(){
-		System.out.print(" ~~~ ");
+		System.out.print(" ~~~  ~~~  ~~~  ~~~  ~~~  ~~~  ~~~  ~~~ ");
 	}
 }
