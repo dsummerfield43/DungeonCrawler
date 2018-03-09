@@ -1,4 +1,3 @@
-package Crawler;
 /**
  * Main dungeon class
  */
@@ -151,7 +150,11 @@ public class Dungeon
 	/**
 	* Base Room roof
 	*/
+<<<<<<< HEAD
 	public String dngTextRoomRoof(){
+=======
+	public static void dngTextRoomRoof(){
+>>>>>>> 846d78731065f4c5b4e8bccff9e175550807b13c
 		return " ___  ___  ___  ___  ___  ___  ___  ___ /n";
 	}
 	/**
