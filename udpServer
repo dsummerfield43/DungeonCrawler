@@ -6,27 +6,26 @@ public class udpServer
 	public static void main(String[] args) throws Exception
 	{
 		
-		String input = "w";
-		InetAddress ip = InetAddress.getByName("xxx.xxx.x.x");
-		
-		DatagramSocket ds = new DatagramSocket(2000); //Creates the socket for UDP connection
-	
-		
-		while(!input.equals("X"))
-		{
-		byte [] b = new byte [100];
-		DatagramPacket dp = new DatagramPacket(b,b.length, ip, 2000); //Creates the packet
 			
+		DatagramSocket ds = new DatagramSocket(8000); //Creates the socket for UDP connection
+		
+		
+		while(true)
+		{
+		byte [] b = new byte [2048];
+		DatagramPacket dp = new DatagramPacket(b,b.length); //Creates the first packet
 		ds.receive(dp);  //Receives packet as lower case
 		
-		input = new String(b); // Changes the byte array to a string that can be worked with
+		byte[] packetData = dp.getData(); // Gets the input from the packet
+		String input = new String(packetData); // Changes the byte array to a string that can be worked with
 		
-		input = input.toUpperCase(); // Changes the string to all upper case letters
+		String inputUpper = input.toUpperCase(); // Changes the string to all upper case letters
 		
-		b = input.getBytes(); // Changes the string back to a byte array to be sent as a packet
-		ds.send(dp); //Sends the packet back 
+		byte [] b2 = inputUpper.getBytes(); //Creates a second byte with the new all upper case string
+		DatagramPacket dp2 = new DatagramPacket(b2, b2.length, dp.getAddress(), dp.getPort()); //Creates the second packet
 		
-		System.out.println(input);
-	}
-}
-}
+		ds.send(dp2); //Sends the packet back 
+		
+		} 	
+ } 
+ }
